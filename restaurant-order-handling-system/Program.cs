@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+namespace restaurant_order_handling_system
+{
+    class Program
+    {
+        static void Main()
+        {
+            Kitchen kitchen = new Kitchen();
+            kitchen.Run();
+        }
+    }
+}
