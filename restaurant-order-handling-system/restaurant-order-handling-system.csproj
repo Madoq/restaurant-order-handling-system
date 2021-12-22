@@ -8,4 +8,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="NewFile1.txt" />
+    <None Remove="ToDo" />
+  </ItemGroup>
+
 </Project>

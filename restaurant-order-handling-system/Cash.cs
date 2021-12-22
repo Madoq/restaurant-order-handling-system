@@ -1,32 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using restaurant_order_handling_system.Dishes;
-
 namespace restaurant_order_handling_system
 {
-    class Kitchen
+    class Cash
     {
-        Menu menu = new Menu();
-        public Kitchen()
+        Dictionary<int, Dish> menu;
+        List<Dish> order = new List<Dish>();
+        double static cashTotal;
+        public Cash(Dictionary<int, Dish> menu)
         {
-            //seed example
-            menu.Add(1, new MainCourse());
+            this.menu = menu;
         }
-
-        public void Run()
+        private bool openCash = true;
+        public void run()
         {
-
-            while (true)
+            while (openCash)
             {
-                Console.WriteLine("Restaurant Order Handling System");
-                Console.WriteLine("1. Display Menu");
-                Console.WriteLine("2. Add Dish");
-                Console.WriteLine("3. Delete Dish");
-                Console.WriteLine("4. Open Cash");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("Cash system");
+                Console.WriteLine("1. Create new order");
+                Console.WriteLine("2. Menu");
+                Console.WriteLine("3. Show total mani");
+                Console.WriteLine("4. Exit");
                 int option;
                 try
                 {
@@ -34,14 +31,19 @@ namespace restaurant_order_handling_system
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    throw ex;
                 }
-
                 switch (option)
                 {
                     case 1:
                         {
-
+                            do 
+                            { 
+                                int menuItem;
+                                menuItem = (int)Console.ReadLine();
+                                order.Add(menu[menuItem]);
+                                cashTotal += menu[menuItem].Price;
+                            }while()
                         }
                         break;
                     case 2:
@@ -51,17 +53,12 @@ namespace restaurant_order_handling_system
                         break;
                     case 3:
                         {
-
+                            
                         }
                         break;
                     case 4:
                         {
-                            Cash cash = new Cash(menu);
-                        }
-                        break;
-                    case 5:
-                        {
-                            Environment.Exit(0);
+                            openCash = false;
                         }
                         break;
                     default:
@@ -72,6 +69,5 @@ namespace restaurant_order_handling_system
                 }
             }
         }
-
     }
 }

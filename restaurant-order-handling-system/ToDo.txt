@@ -1,0 +1,10 @@
+﻿#2	paradygmat obiektowy			X
+#3	konstruktory					X
+#4	hermetyzacja/enkapsulacja		X
+#5	dziedziczenie					X
+#6	wielokrotne dziedziczenie		-
+#7	interfejsy						[bedo]
+#8	przeciążanie operatorów			cash, order += dish...
+#9	klasy i metody abstrakcyjne		X
+#10 cechy							-
+#11	refleksja						?S
