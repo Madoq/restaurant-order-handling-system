@@ -8,15 +8,19 @@ namespace restaurant_order_handling_system
 {
     class Menu
     {
-        Dictionary<int,Dish> menu = new Dictionary<int, Dish>();
-        public void MenuShow(DishType? dishType)
+        public Dictionary<int,Dish> menu = new Dictionary<int, Dish>();
+        public Dictionary<int, Dish> GetMenu(DishType? dishType = null)
         {
-
+            if (dishType == null) return menu;
+            return menu.Where(d => d.Value.GetType().Name == dishType.ToString()).ToDictionary(d => d.Key, d => d.Value);
         }
     }
-    enum DishType
+    public enum DishType
     {
         MainCourse,
-        Dessert
+        Dessert,
+        Soup,
+        Drink,
+        Appetizer
     }
 }
