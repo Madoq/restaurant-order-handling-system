@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "restaurant-order-handling-system": {
+      "commandName": "Project"
+    },
+    "WSL 2": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}

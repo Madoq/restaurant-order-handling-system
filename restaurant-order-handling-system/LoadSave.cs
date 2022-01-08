@@ -12,17 +12,17 @@ namespace restaurant_order_handling_system.Dishes
         {
             try
             {
-                StreamReader sr = new StreamReader($"repos/{repoName}.txt");
-                string[] newDishes = sr.ReadToEnd().Split('\n\n');
-                //name, price, ingredients, weight
-                foreach(string dish in newDishes)
-                {
+                //StreamReader sr = new StreamReader($"repos/{repoName}.txt");
+                //string[] newDishes = sr.ReadToEnd().Split("\n\n");
+                ////name, price, ingredients, weight
+                //foreach(string dish in newDishes)
+                //{
                     
-                }
+                //}
 
-                int postNr = (posts.Count > 0) ? posts.Keys.Max() + 1 : 1;
-                foreach (string newPost in newPosts) posts.Add(postNr++, newPost);
-                sr.Close();
+                //int postNr = (posts.Count > 0) ? posts.Keys.Max() + 1 : 1;
+                //foreach (string newPost in newPosts) posts.Add(postNr++, newPost);
+                //sr.Close();
 
                 //repoName = repo.txt
                 //repo:

@@ -9,7 +9,7 @@ namespace restaurant_order_handling_system
     {
         Dictionary<int, Dish> menu;
         List<Dish> order = new List<Dish>();
-        double static cashTotal;
+        double cashTotal;
         public Cash(Dictionary<int, Dish> menu)
         {
             this.menu = menu;
@@ -24,39 +24,34 @@ namespace restaurant_order_handling_system
                 Console.WriteLine("2. Menu");
                 Console.WriteLine("3. Show total mani");
                 Console.WriteLine("4. Exit");
-                int option;
-                try
-                {
-                    option = (int)Console.ReadLine();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+
+                char option;
+                option = Console.ReadKey().KeyChar;
+
                 switch (option)
                 {
-                    case 1:
+                    case '1':
                         {
-                            do 
-                            { 
+                            do
+                            {
                                 int menuItem;
-                                menuItem = (int)Console.ReadLine();
+                                menuItem = int.Parse(Console.ReadLine());
                                 order.Add(menu[menuItem]);
                                 cashTotal += menu[menuItem].Price;
-                            }while()
+                            } while (true);
                         }
                         break;
-                    case 2:
+                    case '2':
                         {
 
                         }
                         break;
-                    case 3:
+                    case '3':
                         {
                             
                         }
                         break;
-                    case 4:
+                    case '4':
                         {
                             openCash = false;
                         }
