@@ -8,6 +8,10 @@ namespace restaurant_order_handling_system
 {
     class Ingredient
     {
-       String name;
-    }
+        public string name { get; }
+        public Ingredient(string name)
+        {
+            this.name = name;
+        }
+     }
 }
