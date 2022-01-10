@@ -74,8 +74,8 @@ namespace restaurant_order_handling_system.Dishes
             using var sw = new StreamWriter(filestr);
             foreach(KeyValuePair<int, Dish>  item in menutosave)
             {
-                item.Key.ToString();
-                sw.WriteLine(item.Key.ToString()+";"+item.Value.GetType().Name+";"+item.Value.DishToString());
+            
+                sw.WriteLine(item.Key.ToString()+";"+item.Value.GetType().Name+";"+item.Value.DishToStringSave());
             }
         }
         public static List<Ingredient> casttolist(String[] list)
