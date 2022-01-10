@@ -127,6 +127,7 @@ namespace restaurant_order_handling_system
                     this.Positions.Add(PositionIndex, addedDish);
                     this.PositionIndex++;
                     this.UpdateBill(addedDish.Price);
+                    Kitchen.MenuContinue($"{addedDish.Name} was added to order.");
                 }
             }
         }
