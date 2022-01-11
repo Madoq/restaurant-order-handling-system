@@ -45,5 +45,9 @@ namespace restaurant_order_handling_system
             ingredients = ingredients.Remove(ingredients.Length - 1);
             return ingredients;
         }
+        public  String GetIngredients()
+        {
+            return IngredientsToString(this.Ingredients);
+        }
     }
 }
