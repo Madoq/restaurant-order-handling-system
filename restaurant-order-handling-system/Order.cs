@@ -84,7 +84,6 @@ namespace restaurant_order_handling_system
             }
             Console.WriteLine($"Bill: {this.Bill}$");
         }
-
         private void AddPosition()
         {
             bool insideMenu = true;
@@ -92,6 +91,7 @@ namespace restaurant_order_handling_system
             string userInput;
             while (insideMenu)
             {
+                insideCategory = true;
                 Console.Clear();
                 Console.WriteLine("Select category:");
                 this.ShowMenuCategories();
@@ -102,12 +102,11 @@ namespace restaurant_order_handling_system
                     break;
                 }
                 int option;
-                if (!Int32.TryParse(userInput, out option) || !InputInRange(option, new int[] { 1, 2, 3, 4, 5 }))
+                if (!Int32.TryParse(userInput, out option) || !InputInRange(option, new int[] { 1, 2, 3, 4, 5, }))
                 {
                     continue;
                 }
 
-                insideCategory = true;
                 var categoryMenu = this.GetCategoryMenu(userInput);
                 while (insideCategory)
                 {
@@ -137,7 +136,6 @@ namespace restaurant_order_handling_system
         {
             this.Bill += amount;
         }
-
         private void UpdatePositionsKeys()
         {
             Dictionary<int, Dish> newPositions = new Dictionary<int, Dish>();
@@ -153,21 +151,21 @@ namespace restaurant_order_handling_system
         private void RemovePosition()
         {
             bool insideRemove = true;
-            string userInput;
+            char userInput;
             while (insideRemove)
             {
                 Console.Clear();
                 Console.WriteLine("Remove position:");
                 this.ListPositions();
                 Console.WriteLine("B. Back");
-                userInput = Console.ReadLine();
-                if (userInput.ToLower() == "b")
+                userInput = Console.ReadKey().KeyChar;
+                if (userInput == 'b')
                 {
                     insideRemove = false;
                     break;
                 }
                 int option;
-                if (!Int32.TryParse(userInput, out option) || !InputInRange(option, this.Positions.Keys.ToArray()))
+                if (!Int32.TryParse(userInput.ToString(), out option) || !InputInRange(option, this.Positions.Keys.ToArray()))
                 {
                     continue;
                 }
@@ -175,7 +173,6 @@ namespace restaurant_order_handling_system
                 this.UpdateBill(-removedPosition.Value.Price);
                 this.Positions.Remove(option);
                 this.UpdatePositionsKeys();
-                Kitchen.MenuContinue($"{removedPosition.Value.Name} was removed from the order.");
             }
         }
 
@@ -201,7 +198,7 @@ namespace restaurant_order_handling_system
         {
             foreach (KeyValuePair<int, Dish> item in category)
             {
-                Console.WriteLine($"{item.Key}: {item.Value.Name} - {item.Value.Price}$");
+                Console.WriteLine($"{item.Key}: {item.Value.Name}");
             }
             Console.WriteLine("B. Back");
         }
@@ -223,7 +220,7 @@ namespace restaurant_order_handling_system
                 case "4":
                     menuCategory = menu.GetMenu(DishType.Soup);
                     break;
-                case "6":
+                case "5":
                     menuCategory = menu.GetMenu(DishType.Dessert);
                     break;
                 default:

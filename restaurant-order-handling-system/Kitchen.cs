@@ -12,8 +12,11 @@ namespace restaurant_order_handling_system
     {
         Menu menu = new Menu();
         LoadSave loadsave = new LoadSave();
-        public Kitchen()
-        {}
+        String name;
+        public Kitchen(String name)
+        {
+            this.name = name;
+        }
 
         public void Run()
         {
@@ -22,7 +25,7 @@ namespace restaurant_order_handling_system
             while (true)
             {
                Console.Clear();
-                Console.WriteLine("Restaurant Order Handling System");
+                Console.WriteLine(name+" - Restaurant Order Handling System");
                 Console.WriteLine("1. Display Menu");
                 Console.WriteLine("2. Add Dish");
                 Console.WriteLine("3. Delete Dish");
@@ -43,11 +46,14 @@ namespace restaurant_order_handling_system
                             Console.WriteLine("4. Drink");
                             Console.WriteLine("5. Soup");
                             Console.WriteLine("6. Dessert");
+                            Console.WriteLine("7. Vegan dishes");
                             Console.WriteLine("B. Back");
+                    
                             switch(Console.ReadKey().KeyChar)
                             {
+                                
                                 case '1':
-                                    DisplayMenu(menu.GetMenu());
+                                    DisplayMenu(menu.GetMenu());   
                                     break;
                                 case '2':
                                     DisplayMenu(menu.GetMenu(DishType.MainCourse));
@@ -64,6 +70,9 @@ namespace restaurant_order_handling_system
                                 case '6':
                                     DisplayMenu(menu.GetMenu(DishType.Dessert));
                                     break;
+                                case '7':
+                                    DisplayVegan(menu.GetMenu());
+                                    break; 
                                 default:
                                     Console.Clear();
                                     break;
@@ -90,10 +99,8 @@ namespace restaurant_order_handling_system
                             double price;
                             int weight;
                             List<Ingredient> ingredients = new List<Ingredient>();
-                            bool isVegan = false;
-                            Dish newDish = null;
-
-                            while (dishName == "")
+                            Boolean vegan;
+                            while(dishName == "")
                             {
                                 Console.WriteLine("Dish Name: ");
                                 dishName = Console.ReadLine();
@@ -113,47 +120,40 @@ namespace restaurant_order_handling_system
                             {
                                 ingredients.Add(new Ingredient(ingredientName));
                             }
-                            Console.WriteLine("Is the dish vegan? y/n");
-                            while (true)
+                            Console.WriteLine("Is this dish vegan? Type True or False");
+                            while (!Boolean.TryParse(Console.ReadLine() , out vegan))
                             {
-                                char veganOption = Console.ReadKey().KeyChar;
-                                if (veganOption == 'Y' || veganOption == 'y')
-                                {
-                                    isVegan = true;
-                                    break;
-                                }
-                                if (veganOption == 'N' || veganOption == 'n')
-                                {
-                                    isVegan = false;
-                                    break;
-                                }
-                            }
-                                                        
+                                Console.WriteLine(" Expression invalid");
+                            }    
                             switch (option)
                             {
                                 case '1':
-                                    newDish = new MainCourse(dishName, price, ingredients, weight);
+                                MainCourse maincourse = new MainCourse(dishName, price, ingredients, weight);
+                                maincourse.isvegan(vegan);
+                                    menu.menu.Add(loadsave.dishIndex++, maincourse);
                                     break;
                                 case '2':
-                                    newDish = new Appetizer(dishName, price, ingredients, weight);
+                                Appetizer appetizer = new Appetizer(dishName, price, ingredients, weight);
+                                appetizer.isvegan(vegan);
+                                    menu.menu.Add(loadsave.dishIndex++, appetizer);
                                     break;
                                 case '3':
-                                    newDish = new Drink(dishName, price, ingredients, weight);
+                                Drink drink = new Drink(dishName, price, ingredients, weight);
+                                drink.isvegan(vegan);
+                                    menu.menu.Add(loadsave.dishIndex++, drink);
                                     break;
                                 case '4':
-                                    newDish = new Soup(dishName, price, ingredients, weight);
+                                Soup soup = new Soup(dishName, price, ingredients, weight);
+                                soup.isvegan(vegan);
+                                    menu.menu.Add(loadsave.dishIndex++, soup);
                                     break;
                                 case '5':
-                                    newDish = new Dessert(dishName, price, ingredients, weight);
+                                Dessert dessert = new Dessert(dishName, price, ingredients, weight);
+                                dessert.isvegan(vegan);
+                                    menu.menu.Add(loadsave.dishIndex++, dessert);
                                     break;
                                 default:
                                     break;
-                            }
-                            if (newDish != null)
-                            {
-                                newDish.isvegan(isVegan);
-                                menu.menu.Add(loadsave.dishIndex++, newDish);
-                                MenuContinue("Dish added.");
                             }
                         }
                         break;
@@ -200,11 +200,19 @@ namespace restaurant_order_handling_system
         {
             Console.Clear();
             foreach(KeyValuePair<int, Dish> item in menu)
-                Console.WriteLine($"{item.Key}: {item.Value.Name}");
+                Console.WriteLine($"{item.Key}: {item.Value.Name} {item.Value.Price}$ {item.Value.Weight}G :({item.Value.GetIngredients()})");
+        }
+        public static void DisplayVegan(Dictionary<int, Dish> menu)
+        {
+            Console.Clear();
+            foreach(KeyValuePair<int, Dish> item in menu)
+            if(item.Value.ifisvegan==true)
+            {
+                Console.WriteLine($"{item.Key}: {item.Value.Name} {item.Value.Price}$ {item.Value.Weight}G :({item.Value.GetIngredients()})");;
+            }
         }
         public static void MenuContinue(string input = null)
         {
-            Console.WriteLine();
             Console.WriteLine(input);
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

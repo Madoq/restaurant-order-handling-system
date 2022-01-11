@@ -73,7 +73,7 @@ namespace restaurant_order_handling_system.Dishes
         public void Savemenu (Menu menu,String menuname)
         {
            Dictionary<int,Dish> menutosave = menu.GetMenu();
-            var pth = Directory.GetCurrentDirectory()+'/'+menuname;
+            var pth = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName+'/'+menuname;
             Console.WriteLine("\n"+pth);
             using var filestr = File.Create(pth);
             using var sw = new StreamWriter(filestr);
