@@ -18,6 +18,7 @@ namespace restaurant_order_handling_system
         public void Run()
         {
             menu = loadsave.LoadMenu("menu.txt");
+            Cash cash = new Cash(menu);
             while (true)
             {
                Console.Clear();
@@ -151,7 +152,7 @@ namespace restaurant_order_handling_system
                         break;
                     case '4':
                         {
-                            //Cash cash = new Cash(menu);
+                            cash.Run();
                         }
                         break;
                     case '5':

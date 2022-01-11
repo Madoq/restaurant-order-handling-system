@@ -7,23 +7,24 @@ namespace restaurant_order_handling_system
 {
     class Cash
     {
-        Dictionary<int, Dish> menu;
-        List<Dish> order = new List<Dish>();
-        double cashTotal;
-        public Cash(Dictionary<int, Dish> menu)
+        readonly OrderSystem orderSystem;
+        readonly Menu menu = new Menu();
+        public Cash(Menu menu)
         {
             this.menu = menu;
+            this.orderSystem = new OrderSystem(menu);
         }
-        private bool openCash = true;
-        public void run()
+
+        public void Run()
         {
+            bool openCash = true;
             while (openCash)
             {
+                Console.Clear();
                 Console.WriteLine("Cash system");
-                Console.WriteLine("1. Create new order");
-                Console.WriteLine("2. Menu");
-                Console.WriteLine("3. Show total mani");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("1. Order system");
+                Console.WriteLine("2. Money balance");
+                Console.WriteLine("X. Exit");
 
                 char option;
                 option = Console.ReadKey().KeyChar;
@@ -32,33 +33,25 @@ namespace restaurant_order_handling_system
                 {
                     case '1':
                         {
-                            do
-                            {
-                                int menuItem;
-                                menuItem = int.Parse(Console.ReadLine());
-                                order.Add(menu[menuItem]);
-                                cashTotal += menu[menuItem].Price;
-                            } while (true);
+                            orderSystem.Run();
                         }
                         break;
                     case '2':
                         {
-
+                            Console.Clear();
+                            orderSystem.GetBalance();
+                            Console.ReadKey();
                         }
                         break;
-                    case '3':
-                        {
-                            
-                        }
-                        break;
-                    case '4':
+                    case 'X':
+                    case 'x':
                         {
                             openCash = false;
                         }
                         break;
                     default:
                         {
-                            Console.WriteLine("No such option ;<");
+                            Console.Clear();
                         }
                         break;
                 }
