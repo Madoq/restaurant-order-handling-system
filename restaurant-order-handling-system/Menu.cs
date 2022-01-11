@@ -24,6 +24,18 @@ namespace restaurant_order_handling_system
             if (dishType == null) return menu;
             return menu.Where(d => d.Value.GetType().Name == dishType.ToString()).ToDictionary(d => d.Key, d => d.Value);
         }
+        public Dictionary<int, Dish> GetVegan()
+        {
+            Dictionary<int, Dish> veganmenu = new Dictionary<int, Dish>();
+            foreach(KeyValuePair<int, Dish> item in menu)
+            {
+                if(item.Value.ifisvegan==true)
+                {
+                    veganmenu.Add(item.Key,item.Value);
+                }
+            }
+            return veganmenu;    
+        }
     }
 
     public enum DishType

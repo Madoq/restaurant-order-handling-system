@@ -84,7 +84,6 @@ namespace restaurant_order_handling_system
             }
             Console.WriteLine($"Bill: {this.Bill}$");
         }
-
         private void AddPosition()
         {
             bool insideMenu = true;

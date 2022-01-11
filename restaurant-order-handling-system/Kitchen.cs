@@ -12,8 +12,11 @@ namespace restaurant_order_handling_system
     {
         Menu menu = new Menu();
         LoadSave loadsave = new LoadSave();
-        public Kitchen()
-        {}
+        String name;
+        public Kitchen(String name)
+        {
+            this.name = name;
+        }
 
         public void Run()
         {
@@ -22,7 +25,7 @@ namespace restaurant_order_handling_system
             while (true)
             {
                Console.Clear();
-                Console.WriteLine("Restaurant Order Handling System");
+                Console.WriteLine(name+" - Restaurant Order Handling System");
                 Console.WriteLine("1. Display Menu");
                 Console.WriteLine("2. Add Dish");
                 Console.WriteLine("3. Delete Dish");
@@ -43,11 +46,12 @@ namespace restaurant_order_handling_system
                             Console.WriteLine("4. Drink");
                             Console.WriteLine("5. Soup");
                             Console.WriteLine("6. Dessert");
+                            Console.WriteLine("7. Vegan dishes");
                             Console.WriteLine("B. Back");
                             switch(Console.ReadKey().KeyChar)
                             {
                                 case '1':
-                                    DisplayMenu(menu.GetMenu());
+                                    DisplayMenu(menu.GetMenu());   
                                     break;
                                 case '2':
                                     DisplayMenu(menu.GetMenu(DishType.MainCourse));
@@ -64,6 +68,9 @@ namespace restaurant_order_handling_system
                                 case '6':
                                     DisplayMenu(menu.GetMenu(DishType.Dessert));
                                     break;
+                                case '7':
+                                    DisplayVegan(menu.GetMenu());
+                                    break; 
                                 default:
                                     Console.Clear();
                                     break;
@@ -200,7 +207,16 @@ namespace restaurant_order_handling_system
         {
             Console.Clear();
             foreach(KeyValuePair<int, Dish> item in menu)
-                Console.WriteLine($"{item.Key}: {item.Value.Name}");
+                Console.WriteLine($"{item.Key}: {item.Value.Name} {item.Value.Price}$ {item.Value.Weight}G :({item.Value.GetIngredients()})");
+        }
+        public static void DisplayVegan(Dictionary<int, Dish> menu)
+        {
+            Console.Clear();
+            foreach(KeyValuePair<int, Dish> item in menu)
+            if(item.Value.ifisvegan==true)
+            {
+                Console.WriteLine($"{item.Key}: {item.Value.Name} {item.Value.Price}$ {item.Value.Weight}G :({item.Value.GetIngredients()})");;
+            }
         }
         public static void MenuContinue(string input = null)
         {

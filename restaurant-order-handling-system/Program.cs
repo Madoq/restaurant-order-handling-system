@@ -10,7 +10,7 @@ namespace restaurant_order_handling_system
     {
         static void Main()
         {
-            Kitchen kitchen = new Kitchen();
+            Kitchen kitchen = new Kitchen("Chicken House");
             kitchen.Run();
         }
     }
