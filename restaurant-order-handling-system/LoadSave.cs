@@ -15,7 +15,7 @@ namespace restaurant_order_handling_system.Dishes
              Menu menu = new Menu();
             try
             {
-            var path = Directory.GetCurrentDirectory()+'/'+filename;
+            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName+'/'+filename;
             using var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             using var sr = new StreamReader(fs, Encoding.UTF8);
             string line = String.Empty;
