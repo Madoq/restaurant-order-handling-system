@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/bin/Debug/net6.0/restaurant-order-handling-system.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {

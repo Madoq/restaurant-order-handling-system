@@ -1,4 +1,4 @@
 interface IisVegan
 {
-    public Boolean isvegan();
+    public void isvegan(Boolean bl);
 }
