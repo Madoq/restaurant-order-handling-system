@@ -1,0 +1,5 @@
+1;Maincourse;Chicken;2;chicken,flavours;250;False
+2;Appetizer;Nuggets;5;grounded chicken,bread crumbs;420;False
+3;Dessert;Chicken Ice Cream;8;grounded chicken,cream, ice;250;False
+4;Drink;Chicken Fat;9;water,chicken fat;330;False
+5;Soup;Chicken Soup;8;chicken meat,water,vegetables;200;False

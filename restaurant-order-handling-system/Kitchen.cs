@@ -11,35 +11,24 @@ namespace restaurant_order_handling_system
     class Kitchen
     {
         Menu menu = new Menu();
-        int dishIndex = 1;
+        LoadSave loadsave = new LoadSave();
         public Kitchen()
-        {
-            //seed example
-            menu.menu.Add(dishIndex++, new MainCourse("Chicken Dish", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Appetizer("Chicken Wings", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Drink("Chicken Fat", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Soup("Chicken Soup", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Dessert("Chicken Chocolate", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new MainCourse("Duck Dish", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Appetizer("Duck Wings", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Drink("Duck Fat", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Soup("Duck Soup", 25, new List<Ingredient>(), 1));
-            menu.menu.Add(dishIndex++, new Dessert("Duck Chocolate", 25, new List<Ingredient>(), 1));
-        }
+        {}
 
         public void Run()
         {
+            menu = loadsave.LoadMenu("menu.txt");
             Cash cash = new Cash(menu);
             while (true)
             {
-                Console.Clear();
+               Console.Clear();
                 Console.WriteLine("Restaurant Order Handling System");
                 Console.WriteLine("1. Display Menu");
                 Console.WriteLine("2. Add Dish");
                 Console.WriteLine("3. Delete Dish");
                 Console.WriteLine("4. Open Cash");
-                Console.WriteLine("5. Exit");
-
+                Console.WriteLine("5. Save Menu changes");
+                Console.WriteLine("6. Exit");
                 char option;
                 option = Console.ReadKey().KeyChar;
 
@@ -126,19 +115,19 @@ namespace restaurant_order_handling_system
                             switch (option)
                             {
                                 case '1':
-                                    menu.menu.Add(dishIndex++, new MainCourse(dishName, price, ingredients, weight));
+                                    menu.menu.Add(loadsave.dishIndex++, new MainCourse(dishName, price, ingredients, weight));
                                     break;
                                 case '2':
-                                    menu.menu.Add(dishIndex++, new Appetizer(dishName, price, ingredients, weight));
+                                    menu.menu.Add(loadsave.dishIndex++, new Appetizer(dishName, price, ingredients, weight));
                                     break;
                                 case '3':
-                                    menu.menu.Add(dishIndex++, new Drink(dishName, price, ingredients, weight));
+                                    menu.menu.Add(loadsave.dishIndex++, new Drink(dishName, price, ingredients, weight));
                                     break;
                                 case '4':
-                                    menu.menu.Add(dishIndex++, new Soup(dishName, price, ingredients, weight));
+                                    menu.menu.Add(loadsave.dishIndex++, new Soup(dishName, price, ingredients, weight));
                                     break;
                                 case '5':
-                                    menu.menu.Add(dishIndex++, new Dessert(dishName, price, ingredients, weight));
+                                    menu.menu.Add(loadsave.dishIndex++, new Dessert(dishName, price, ingredients, weight));
                                     break;
                                 default:
                                     break;
@@ -167,6 +156,11 @@ namespace restaurant_order_handling_system
                         }
                         break;
                     case '5':
+                        {
+                            loadsave.Savemenu(menu, "menu.txt");
+                        }
+                        break;
+                    case '6':
                         {
                             Environment.Exit(0);
                         }
