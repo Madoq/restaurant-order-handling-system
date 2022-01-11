@@ -90,8 +90,10 @@ namespace restaurant_order_handling_system
                             double price;
                             int weight;
                             List<Ingredient> ingredients = new List<Ingredient>();
+                            bool isVegan = false;
+                            Dish newDish = null;
 
-                            while(dishName == "")
+                            while (dishName == "")
                             {
                                 Console.WriteLine("Dish Name: ");
                                 dishName = Console.ReadLine();
@@ -111,26 +113,47 @@ namespace restaurant_order_handling_system
                             {
                                 ingredients.Add(new Ingredient(ingredientName));
                             }
-                            
+                            Console.WriteLine("Is the dish vegan? y/n");
+                            while (true)
+                            {
+                                char veganOption = Console.ReadKey().KeyChar;
+                                if (veganOption == 'Y' || veganOption == 'y')
+                                {
+                                    isVegan = true;
+                                    break;
+                                }
+                                if (veganOption == 'N' || veganOption == 'n')
+                                {
+                                    isVegan = false;
+                                    break;
+                                }
+                            }
+                                                        
                             switch (option)
                             {
                                 case '1':
-                                    menu.menu.Add(loadsave.dishIndex++, new MainCourse(dishName, price, ingredients, weight));
+                                    newDish = new MainCourse(dishName, price, ingredients, weight);
                                     break;
                                 case '2':
-                                    menu.menu.Add(loadsave.dishIndex++, new Appetizer(dishName, price, ingredients, weight));
+                                    newDish = new Appetizer(dishName, price, ingredients, weight);
                                     break;
                                 case '3':
-                                    menu.menu.Add(loadsave.dishIndex++, new Drink(dishName, price, ingredients, weight));
+                                    newDish = new Drink(dishName, price, ingredients, weight);
                                     break;
                                 case '4':
-                                    menu.menu.Add(loadsave.dishIndex++, new Soup(dishName, price, ingredients, weight));
+                                    newDish = new Soup(dishName, price, ingredients, weight);
                                     break;
                                 case '5':
-                                    menu.menu.Add(loadsave.dishIndex++, new Dessert(dishName, price, ingredients, weight));
+                                    newDish = new Dessert(dishName, price, ingredients, weight);
                                     break;
                                 default:
                                     break;
+                            }
+                            if (newDish != null)
+                            {
+                                newDish.isvegan(isVegan);
+                                menu.menu.Add(loadsave.dishIndex++, newDish);
+                                MenuContinue("Dish added.");
                             }
                         }
                         break;
@@ -181,6 +204,7 @@ namespace restaurant_order_handling_system
         }
         public static void MenuContinue(string input = null)
         {
+            Console.WriteLine();
             Console.WriteLine(input);
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
