@@ -222,7 +222,7 @@ namespace restaurant_order_handling_system
                 case "4":
                     menuCategory = menu.GetMenu(DishType.Soup);
                     break;
-                case "6":
+                case "5":
                     menuCategory = menu.GetMenu(DishType.Dessert);
                     break;
                 default:
